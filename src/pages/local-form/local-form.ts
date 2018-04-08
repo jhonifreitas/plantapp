@@ -35,9 +35,10 @@ export class LocalFormPage {
 
 	ionViewDidLoad() {
 		if (this.navParams.get('local')) {
-			this.id = this.navParams.get('local').id;
-			this.active = this.navParams.get('local').active;
-			this.formLocal.get('name').setValue(this.navParams.get('local').name);
+			let local = this.navParams.get('local')
+			this.id = local.id;
+			this.active = local.active;
+			this.formLocal.get('name').setValue(local.name);
 		}
 	}
 

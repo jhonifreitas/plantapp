@@ -62,19 +62,20 @@ export class PlantacoesFormPage {
 	ionViewDidLoad() {
 		this.local = this.navParams.get('local')
 		if (this.navParams.get('plant')) {
-			this.id = this.navParams.get('plant').id;
-			this.active = this.navParams.get('plant').active;
+			let plant = this.navParams.get('plant')
+			this.id = plant.id;
+			this.active = plant.active;
 			
-			let types = this.navParams.get('plant').types
+			let types = plant.types
 			let typesId:any = Array();
 			types.forEach(type => {
 				typesId.push(type.id)
 			})
 			this.formPlantacao.get('type_id').setValue(typesId)
-			this.formPlantacao.get('name').setValue(this.navParams.get('plant').name)
-			this.formPlantacao.get('hour_begin').setValue(this.navParams.get('plant').hour_begin)
-			this.formPlantacao.get('hour_end').setValue(this.navParams.get('plant').hour_end)
-			if (this.navParams.get('plant').repeated == '1') {
+			this.formPlantacao.get('name').setValue(plant.name)
+			this.formPlantacao.get('hour_begin').setValue(plant.hour_begin)
+			this.formPlantacao.get('hour_end').setValue(plant.hour_end)
+			if (plant.repeated == '1') {
 				this.formPlantacao.get('repeat').setValue(true)
 			}
 		}

@@ -99,7 +99,7 @@ export class PlantacoesPage {
 			status = 1;
 			ligado = "ligado";
 		}
-		this.service.call_api('dispositivo', { id: id, status: status })
+		this.service.call_api('changeStatusPlantation', { id: id, status: status })
 			.subscribe(data => {
 				console.log(data)
 				this.functions.load.dismiss();

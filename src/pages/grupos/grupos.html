@@ -6,13 +6,47 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>grupos</ion-title>
-  </ion-navbar>
+	<ion-navbar color="secondary">
+		<button ion-button menuToggle icon-only>
+			<ion-icon name='menu'></ion-icon>
+		</button>
+		<ion-title>Grupos</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<ion-refresher (ionRefresh)="refresh($event)">
+		<ion-refresher-content
+			pullingIcon="arrow-dropdown"
+			pullingText="Puxe para atualizar"
+			refreshingSpinner="circles"
+			refreshingText="Atualizando...">
+		</ion-refresher-content>
+	</ion-refresher>
 
+	<ion-list>
+		<ion-item-sliding #slidingItem *ngFor="let grupo of grupos" bottom>
+			<ion-item-options side="left">
+				<button ion-button color="danger" (click)="alertConfirm(grupo,slidingItem)">
+					<ion-icon name="trash"></ion-icon>
+					excluir
+				</button>
+			</ion-item-options>
+			<ion-item>
+				{{ grupo.name }}
+			</ion-item>
+			<ion-item-options side="right">
+				<button ion-button color="primary" (click)="editar(grupo,slidingItem)">
+					<ion-icon name="create"></ion-icon>
+					editar
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+	<ion-fab bottom right>
+		<button color="secondary" ion-fab (click)="inserir()"><ion-icon name="md-add"></ion-icon></button>
+	</ion-fab>
 </ion-content>

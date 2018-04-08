@@ -6,13 +6,49 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>grupos-form</ion-title>
-  </ion-navbar>
+	<ion-navbar color="secondary">
+		<button ion-button menuToggle icon-only>
+			<ion-icon name='menu'></ion-icon>
+		</button>
+		<ion-title>Formulário de Grupo</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<form [formGroup]="formGrupo" (ngSubmit)="save()">
+		<ion-list>
+	      	<ion-item>
+	          	<ion-label floating>Nome *</ion-label>
+	          	<ion-input type="text" formControlName="name" ></ion-input>
+	      	</ion-item>
+	      	<p padding-top>Permissões</p>
+	      	<ion-item>
+	          	<ion-label floating>Dashboard</ion-label>
+	          	<ion-select formControlName="dashboard" multiple="true">
+			      	<ion-option value="view">Visualizar</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Locais</ion-label>
+	          	<ion-select formControlName="locais" multiple="true">
+			      	<ion-option value="{{ opcao.value }}" *ngFor="let opcao of opcoes">{{ opcao.name }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Plantações</ion-label>
+	          	<ion-select formControlName="plantacoes" multiple="true">
+			      	<ion-option value="{{ opcao.value }}" *ngFor="let opcao of opcoes">{{ opcao.name }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Câmeras</ion-label>
+	          	<ion-select formControlName="cameras" multiple="true">
+			      	<ion-option value="view">Visualizar</ion-option>
+			    </ion-select>
+	      	</ion-item>
+  		</ion-list>
+	    <button ion-button full color="secondary" [disabled]="formGrupo.invalid">Salvar</button>
+    </form>
 </ion-content>
