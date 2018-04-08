@@ -1,0 +1,47 @@
+<!--
+  Generated template for the PlantacoesFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  	<ion-navbar color="secondary">
+  		<button ion-button menuToggle icon-only>
+	      	<ion-icon name='menu'></ion-icon>
+	    </button>
+    	<ion-title>Formulário de Plantação</ion-title>
+  	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<form [formGroup]="formPlantacao" (ngSubmit)="save()">
+		<ion-list>
+	      	<ion-item>
+	          	<ion-label floating>Nome *</ion-label>
+	          	<ion-input type="text" formControlName="name" ></ion-input>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Tipo *</ion-label>
+	          	<ion-select formControlName="type_id" multiple="true">
+			      	<ion-option value="{{ tipo.id }}" *ngFor="let tipo of tipos">{{ tipo.name }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+			  	<ion-label>Agendar</ion-label>
+			  	<ion-toggle formControlName="repeat"></ion-toggle>
+			</ion-item>
+	      	<ion-item>
+			  	<ion-label floating>Hora Inicio</ion-label>
+			  	<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="hour_begin"></ion-datetime>
+			</ion-item>
+			<ion-item>
+			  	<ion-label floating>Hora Fim</ion-label>
+			  	<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="hour_end"></ion-datetime>
+			</ion-item>
+  		</ion-list>
+	    <button ion-button full color="secondary" [disabled]="formPlantacao.invalid">Salvar</button>
+    </form>
+</ion-content>
