@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { FunctionsDefaultProvider } from '../../providers/functions-default/functions-default';
@@ -24,6 +24,7 @@ export class LoginPage {
 
   	constructor(public navCtrl: NavController, 
   				public navParams: NavParams,
+  				private events: Events,
   				private formBuilder: FormBuilder,
 				private functions: FunctionsDefaultProvider,
 				private service: ServiceProvider,
@@ -51,6 +52,8 @@ export class LoginPage {
 				let result:any = data.json()
 				if (result.status) {
 					this.storage.setUser(result.data)
+					this.storage.setPermissions(result.data.group.permissions)
+					this.events.publish('login')
 					this.navCtrl.setRoot(DashboardPage)
 				}else{
 					this.functions.showAlert(result.data)

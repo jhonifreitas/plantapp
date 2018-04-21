@@ -6,13 +6,55 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>usuarios-form</ion-title>
-  </ion-navbar>
+	<ion-navbar color="secondary">
+		<button ion-button menuToggle icon-only>
+			<ion-icon name='menu'></ion-icon>
+		</button>
+		<ion-title>Formulario do Usuário</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<form [formGroup]="formUser" (ngSubmit)="save()">
+		<ion-list>
+			<div [hidden]="alterPassword">
+				<ion-item>
+					<ion-avatar (click)="changePhoto()">
+						<img src="{{ profilePhoto }}"/>
+					</ion-avatar>
+				</ion-item>
+				
+				<ion-item>
+					<ion-label floating>Nome *</ion-label>
+					<ion-input type="text" formControlName="name" ></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>Grupo *</ion-label>
+					<ion-select formControlName="group_id" >
+						<ion-option value="{{ group.id }}" *ngFor="let group of grupos">{{ group.name }}</ion-option>
+					</ion-select>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>Telefone *</ion-label>
+					<ion-input type="tel" formControlName="phone" [brmasker]="{phone: true}"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-label floating>E-mail *</ion-label>
+					<ion-input type="text" formControlName="email" ></ion-input>
+				</ion-item>
+				<p padding-top>Conta</p>
+				<ion-item>
+					<ion-label floating>Login *</ion-label>
+					<ion-input type="text" formControlName="username" ></ion-input>
+				</ion-item>
+			</div>
+			<ion-item [hidden]="hidePassword">
+				<ion-label floating>Senha</ion-label>
+				<ion-input type="password" formControlName="password" ></ion-input>
+			</ion-item>
+		</ion-list>
+		<button ion-button full color="secondary" [disabled]="formUser.invalid">Salvar</button>
+	</form>
 </ion-content>

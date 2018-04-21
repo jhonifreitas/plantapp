@@ -25,7 +25,7 @@
 	      	</ion-item>
 	      	<p padding-top>Permissões</p>
 	      	<ion-item>
-	          	<ion-label floating>Dashboard</ion-label>
+	          	<ion-label floating>Painel de Controle</ion-label>
 	          	<ion-select formControlName="dashboard" multiple="true">
 			      	<ion-option value="view">Visualizar</ion-option>
 			    </ion-select>
@@ -45,7 +45,19 @@
 	      	<ion-item>
 	          	<ion-label floating>Câmeras</ion-label>
 	          	<ion-select formControlName="cameras" multiple="true">
-			      	<ion-option value="view">Visualizar</ion-option>
+			      	<ion-option value="{{ opcao.value }}" *ngFor="let opcao of opcoes">{{ opcao.name }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Grupos</ion-label>
+	          	<ion-select formControlName="grupos" multiple="true">
+			      	<ion-option value="{{ opcao.value }}" *ngFor="let opcao of opcoes">{{ opcao.name }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>Usuários</ion-label>
+	          	<ion-select formControlName="usuarios" multiple="true">
+			      	<ion-option value="{{ opcao.value }}" *ngFor="let opcao of opcoes">{{ opcao.name }}</ion-option>
 			    </ion-select>
 	      	</ion-item>
   		</ion-list>

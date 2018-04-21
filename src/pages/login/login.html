@@ -5,8 +5,8 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
-	<div>
-		<img src="assets/imgs/image.jpg">
+	<div padding margin>
+		<img src="assets/imgs/image.png">
 	</div>
 	<form [formGroup]="formLogin" (ngSubmit)="auth()">
 		<ion-list>
@@ -19,6 +19,6 @@
 				<ion-input type="password" formControlName="password"></ion-input>
 			</ion-item>
 		</ion-list>
-		<button ion-button block color="secondary" [disabled]="formLogin.invalid">Salvar</button>
+		<button ion-button block color="light" [disabled]="formLogin.invalid">Salvar</button>
 	</form>
 </ion-content>

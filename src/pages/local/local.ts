@@ -20,7 +20,7 @@ import { PlantacoesPage } from '../plantacoes/plantacoes';
 })
 export class LocalPage {
 
-	private locais: any
+	private locais: any = []
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
@@ -94,4 +94,7 @@ export class LocalPage {
 		this.navCtrl.push(PlantacoesPage, { local: local });
 	}
 
+	checkPermission(page, permission){
+		return this.functions.checkPermission(page, permission)
+	}
 }

@@ -6,13 +6,59 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>cameras</ion-title>
-  </ion-navbar>
+  	<ion-navbar color="secondary">
+  		<button ion-button menuToggle icon-only>
+			<ion-icon name='menu'></ion-icon>
+		</button>
+    	<ion-title>Câmeras</ion-title>
+  	</ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content id="backList">
 
+	<div *ngIf="cameras.length == 0" class="empty">
+		<div text-center>
+			<h2>Nenhum Registro<br>encontrado!</h2>
+			<img src="assets/imgs/error.png">
+		</div>
+	</div>
+	
+	<ion-list>
+		<ion-item-sliding #slidingItem *ngFor="let camera of cameras; let i = index ">
+			<ion-item-options side="left" *ngIf="checkPermission('del')">
+				<button ion-button color="danger" (click)="alertConfirm(camera,slidingItem)">
+					<ion-icon name="trash"></ion-icon>
+					excluir
+				</button>
+			</ion-item-options>
+			<ion-item>
+				<ion-row>
+					<ion-col style="align-items: center; display: flex;">
+					  <h2>{{ camera.name }}</h2>
+					</ion-col>
+					<button ion-button clear large color="dark" (click)="openVideo(i)">
+						<ion-icon name="md-eye"></ion-icon>
+					</button>
+				</ion-row>
+			</ion-item>
+			<ion-item-options side="right" *ngIf="checkPermission('edit')">
+				<button ion-button color="primary" (click)="editar(camera,slidingItem)">
+					<ion-icon name="create"></ion-icon>
+					editar
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+	<div class="animated" [ngClass]="{'fadeIn': isVideoShow(i), 'fadeOut': !isVideoShow(i)}" *ngFor="let camera of cameras; let i = index " (click)="openVideo(i)">
+		<div class="modalVideo">
+			<iframe [src]="getUrl(camera.url)"></iframe>
+		</div>
+	</div>
+
+	<ion-fab bottom right *ngIf="checkPermission('add')">
+		<button color="secondary" ion-fab (click)="inserir()"><ion-icon name="md-add"></ion-icon></button>
+	</ion-fab>
 </ion-content>

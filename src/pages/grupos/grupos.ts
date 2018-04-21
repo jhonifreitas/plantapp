@@ -19,7 +19,7 @@ import { GruposFormPage } from '../grupos-form/grupos-form';
 })
 export class GruposPage {
 
-	private grupos: any
+	private grupos: any = []
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
@@ -89,4 +89,7 @@ export class GruposPage {
 			}).catch(() => {});
 	}
 
+	checkPermission(permission){
+		return this.functions.checkPermission('grupos', permission)
+	}
 }

@@ -1,0 +1,33 @@
+<!--
+  Generated template for the CamerasFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  	<ion-navbar color="secondary">
+  		<button ion-button menuToggle icon-only>
+	      	<ion-icon name='menu'></ion-icon>
+	    </button>
+    	<ion-title>Formulário de Câmeras</ion-title>
+  	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<form [formGroup]="formCamera" (ngSubmit)="save()">
+		<ion-list>
+	      	<ion-item>
+	          	<ion-label floating>Nome *</ion-label>
+	          	<ion-input type="text" formControlName="name" ></ion-input>
+	      	</ion-item>
+	      	<ion-item>
+	          	<ion-label floating>LINK *</ion-label>
+	          	<ion-input type="text" formControlName="url" ></ion-input>
+	      	</ion-item>
+  		</ion-list>
+	    <button ion-button full color="secondary" [disabled]="formCamera.invalid">Salvar</button>
+    </form>
+</ion-content>

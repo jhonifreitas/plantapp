@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content id="backList">
 	<ion-refresher (ionRefresh)="refresh($event)">
 		<ion-refresher-content
 			pullingIcon="arrow-dropdown"
@@ -26,9 +26,16 @@
 		</ion-refresher-content>
 	</ion-refresher>
 
+	<div *ngIf="locais.length == 0" class="empty">
+		<div text-center>
+			<h2>Nenhum Registro<br>encontrado!</h2>
+			<img src="assets/imgs/error.png">
+		</div>
+	</div>
+
 	<ion-list>
 		<ion-item-sliding #slidingItem *ngFor="let local of locais" bottom>
-			<ion-item-options side="left">
+			<ion-item-options side="left" *ngIf="checkPermission('locais', 'del')">
 				<button ion-button color="danger" (click)="alertConfirm(local,slidingItem)">
 					<ion-icon name="trash"></ion-icon>
 					excluir
@@ -39,12 +46,12 @@
 					<ion-col style="align-items: center; display: flex;">
 					  <h2>{{local.name}}</h2>
 					</ion-col>
-					<button ion-button color="dark" large clear (click)="openPlantacoes(local)">
-						<ion-icon name="md-outlet"></ion-icon>
+					<button ion-button clear no-padding (click)="openPlantacoes(local)" *ngIf="checkPermission('plantacoes', 'view')">
+						<ion-icon><img src="assets/imgs/plants.png"></ion-icon>
 					</button>
 				</ion-row>
 			</ion-item>
-			<ion-item-options side="right">
+			<ion-item-options side="right" *ngIf="checkPermission('locais', 'edit')">
 				<button ion-button color="primary" (click)="editar(local,slidingItem)">
 					<ion-icon name="create"></ion-icon>
 					editar
@@ -53,7 +60,7 @@
 		</ion-item-sliding>
 	</ion-list>
 
-	<ion-fab bottom right>
+	<ion-fab bottom right *ngIf="checkPermission('locais','add')">
 		<button color="secondary" ion-fab (click)="inserir()"><ion-icon name="md-add"></ion-icon></button>
 	</ion-fab>
 </ion-content>

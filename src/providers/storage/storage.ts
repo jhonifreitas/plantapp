@@ -21,4 +21,12 @@ export class StorageProvider {
   		return JSON.parse(localStorage.getItem('user'));
   	}
 
+    setPermissions(dados){
+      localStorage.setItem('permissions', JSON.stringify(dados));
+    }
+
+    getPermissions(){
+      return JSON.parse(localStorage.getItem('permissions'));
+    }
+
 }

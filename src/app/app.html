@@ -1,26 +1,31 @@
 <ion-menu [content]="content">
 	<ion-header color="primary">
-		<ion-toolbar class="menu-interno">
-			<div class="perfil"></div>
-			<div class="dados">
-				<h6 no-margin>{{nome}}</h6>
-				<h6 no-margin><b>{{usuario}}</b></h6>
+		<ion-toolbar class="menu-intern" padding>
+			<div class="profile" margin-bottom text-center>
+				<a menuClose (click)="openPage(profilePage, {local: true})">
+					<img src="{{thumbnail}}" (error)="defaultImage($event)">
+				</a>
+			</div>
+			<div class="data-user" text-center>
+				<h2 no-margin><b>{{name}}</b></h2>
+				<h5 no-margin>{{group}}</h5>
 			</div>
 		</ion-toolbar>
 	</ion-header>
 
 	<ion-content>
 		<ion-list no-lines inset>
-			<div *ngFor="let p of pages">
-				<button menuClose ion-item (click)="openPage(p.component)">
-					<ion-icon name="{{p.icon}}" padding-right></ion-icon>
-					{{p.title}}
+			<div *ngFor="let p of pages" >
+				<button menuClose ion-item (click)="openPage(p.component)" *ngIf="checkPermission(p.permission)">
+					<ion-icon color="dark" name="{{p.icon}}" item-left></ion-icon>
+					<ion-label color="dark">{{p.title}}</ion-label>
 				</button>
 			</div>
 		</ion-list>
 		<ion-footer text-center>
 			<button menuClose ion-button large color="danger" clear (click)="logout()">
 				<ion-icon name="md-log-out"></ion-icon>
+				<small padding-left>Sair</small>
 			</button>
 		</ion-footer>
 	</ion-content>

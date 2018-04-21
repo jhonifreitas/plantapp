@@ -1,3 +1,14 @@
 page-login {
-
+	ion-content{
+		background: linear-gradient(145deg, #0B7065, #4bc0c0) !important;
+	}
+	ion-item{
+		background-color: transparent !important;
+	}
+	ion-item{
+		color: #FFF !important;
+	}
+	ion-item ion-label{
+		color: #F4F4F4 !important;
+	}
 }

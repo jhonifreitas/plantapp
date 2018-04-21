@@ -35,6 +35,8 @@ export class GruposFormPage {
 			locais: [[]],
 			plantacoes: [[]],
 			cameras: [[]],
+			grupos: [[]],
+			usuarios: [[]],
 		});
 
 		this.opcoes = [
@@ -50,8 +52,7 @@ export class GruposFormPage {
 			let grupo = this.navParams.get('grupo')
 			this.id = grupo.id;
 			this.active = grupo.active;
-
-
+			
 			if(grupo.permissions.dashboard){
 				this.checkPermission(grupo.permissions.dashboard, 'dashboard')
 			}if(grupo.permissions.locais){
@@ -60,7 +61,11 @@ export class GruposFormPage {
 				this.checkPermission(grupo.permissions.plantacoes, 'plantacoes')
 			}if(grupo.permissions.cameras){
 				this.checkPermission(grupo.permissions.cameras, 'cameras')
-			}
+			}if(grupo.permissions.grupos){
+				this.checkPermission(grupo.permissions.grupos, 'grupos')
+			}if(grupo.permissions.usuarios){
+				this.checkPermission(grupo.permissions.usuarios, 'usuarios')
+			}			
 
 			this.formGrupo.get('name').setValue(grupo.name);
 		}
@@ -77,11 +82,17 @@ export class GruposFormPage {
 		}if (this.active) {
 			dados.active = this.active
 		}
-
 		this.service.call_api('setGrupo', dados)
 			.subscribe(data => {
 				this.functions.load.dismiss();
-				this.functions.showAlertReturn('Sucesso!', 'Local salvo!')
+				if (this.id == this.storage.getUser().group_id) {
+					delete dados.id
+					delete dados.client_id
+					delete dados.name
+					delete dados.active
+					this.storage.setPermissions(dados)
+				}
+				this.functions.showAlertReturn('Sucesso!', 'Grupo salvo!')
 					.then(()=>{
 						this.fechar()
 					});

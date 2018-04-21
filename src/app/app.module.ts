@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { CamerasPage } from '../pages/cameras/cameras';
+import { CamerasFormPage } from '../pages/cameras-form/cameras-form';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { GruposPage } from '../pages/grupos/grupos';
 import { GruposFormPage } from '../pages/grupos-form/grupos-form';
@@ -22,10 +23,16 @@ import { ServiceProvider } from '../providers/service/service';
 import { FunctionsDefaultProvider } from '../providers/functions-default/functions-default';
 import { StorageProvider } from '../providers/storage/storage';
 
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
+
+import { BrMaskerModule } from 'brmasker-ionic-3';
+
 @NgModule({
   declarations: [
     MyApp,
     CamerasPage,
+    CamerasFormPage,
     DashboardPage,
     GruposPage,
     GruposFormPage,
@@ -41,11 +48,13 @@ import { StorageProvider } from '../providers/storage/storage';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     CamerasPage,
+    CamerasFormPage,
     DashboardPage,
     GruposPage,
     GruposFormPage,
@@ -63,7 +72,9 @@ import { StorageProvider } from '../providers/storage/storage';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServiceProvider,
     FunctionsDefaultProvider,
-    StorageProvider
+    StorageProvider,
+    FileTransfer,
+    Camera
   ]
 })
 export class AppModule {}

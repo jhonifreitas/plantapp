@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ModalController, LoadingController } from 'ionic-angular';
 
+import { StorageProvider } from '../storage/storage';
+
 /*
   Generated class for the FunctionDefaultProvider provider.
 
@@ -14,7 +16,8 @@ export class FunctionsDefaultProvider {
 
   	constructor(public modalCtrl: ModalController,
 				public loadingCtrl: LoadingController,
-                public alertCtrl: AlertController) {
+                public alertCtrl: AlertController,
+                private storage: StorageProvider) {
     
   	}
 
@@ -89,5 +92,17 @@ export class FunctionsDefaultProvider {
             });
             alert.present();
         });
+    }
+
+    checkPermission(page, permission){
+        let result = false
+        if(this.storage.getPermissions()[page]){
+            this.storage.getPermissions()[page].forEach(val=>{
+                if (val == permission) {
+                    result = true
+                }
+            })
+        }
+        return result
     }
 }

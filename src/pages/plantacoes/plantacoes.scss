@@ -1,3 +1,19 @@
 page-plantacoes {
-
+	ion-label h2{
+		display: inline-block;
+	}
+	.accordion{
+		height: 0px;
+		overflow: hidden;
+    	transition: height 200ms;
+	}
+	.accordion.show{
+		height: 40vw;
+		overflow-y: auto;
+	}
+	ion-item ion-icon{
+		font-size: 1.8em;
+		padding-top: 5px;
+		padding-right: 5px;
+	}
 }

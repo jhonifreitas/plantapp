@@ -14,3 +14,45 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.profile img{
+	padding: 5px;
+	margin: auto;
+	width: 110px;
+	height: 110px;
+	object-fit: cover;
+	border-radius: 100%;
+	border: 1px solid #FFF;
+}
+#backList.has-refresher > .scroll-content{
+	background: none;
+}
+#backList{
+	background-color: #f4f4f4;
+	background-image: url(../assets/imgs/background1.png);
+	background-position: bottom;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+ion-menu ion-header{
+	background: linear-gradient(145deg, #0B7065, #4bc0c0) !important;
+}
+ion-menu ion-list .item.item-block,
+ion-menu ion-toolbar .toolbar-background{
+	background: transparent;
+}
+ion-menu ion-header{
+	color: #FFF;
+}
+ion-menu ion-list .item.item-block{
+	font-weight: 900;
+}
+ion-list{
+	margin-bottom: 22%;
+}
+
+.empty{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}

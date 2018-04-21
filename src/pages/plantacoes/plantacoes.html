@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content id="backList">
 	<ion-refresher (ionRefresh)="refresh($event)">
 	    <ion-refresher-content
 		    pullingIcon="arrow-dropdown"
@@ -26,22 +26,40 @@
 	    </ion-refresher-content>
 	</ion-refresher>
 
+	<div *ngIf="plants.length == 0" class="empty">
+		<div text-center>
+			<h2>Nenhum Registro<br>encontrado!</h2>
+			<img src="assets/imgs/error.png">
+		</div>
+	</div>
+
 	<ion-list>
-		<ion-item-sliding #slidingItem *ngFor="let plant of plants" bottom>
-			<ion-item-options side="left">
+		<ion-item-sliding #slidingItem *ngFor="let plant of plants; let i = index " bottom>
+			<ion-item-options side="left" *ngIf="checkPermission('del')">
 				<button ion-button color="danger" (click)="alertConfirm(plant,slidingItem)">
 			        <ion-icon name="trash"></ion-icon>
 			        excluir
 		        </button>
 			</ion-item-options>
 		    <ion-item>
-		    	<ion-toggle [checked]="plant.status" (ionChange)="changeStatus($event,plant.id)"></ion-toggle>
-
-		    	<ion-label padding>
-			        {{ plant.name }}
+		    	<ion-label (click)="toggleGroup(i)" >
+		    		<ion-row>
+						<ion-col style="align-items: center; display: flex;">
+						  	<h2>{{ plant.name }}</h2>
+						</ion-col>
+						<ion-icon color="dark" [name]="isGroupShown(i) ? 'ios-arrow-down' : 'ios-arrow-back'"></ion-icon>
+					</ion-row>
+			        <div class="accordion" [ngClass]="{show: isGroupShown(i)}">
+			        	<ion-list>
+			        		<ion-item *ngFor="let type of plant.types">
+			        			<ion-toggle [checked]="plant.status" (ionChange)="changeStatus($event,plant.id)"></ion-toggle>
+			        			<ion-label>{{ type.name }}</ion-label>
+			        		</ion-item>
+			        	</ion-list>
+			        </div>
 			    </ion-label>
 		    </ion-item>
-		    <ion-item-options side="right">
+		    <ion-item-options side="right" *ngIf="checkPermission('edit')">
 		        <button ion-button color="primary" (click)="editar(plant,slidingItem)">
 			        <ion-icon name="create"></ion-icon>
 			        editar
@@ -50,7 +68,7 @@
 		</ion-item-sliding>
 	</ion-list>
 
-	<ion-fab bottom right>
+	<ion-fab bottom right *ngIf="checkPermission('add')">
     	<button color="secondary" ion-fab (click)="inserir()"><ion-icon name="md-add"></ion-icon></button>
   	</ion-fab>
 </ion-content>

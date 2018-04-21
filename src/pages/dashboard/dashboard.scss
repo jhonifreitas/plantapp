@@ -1,9 +1,8 @@
 page-dashboard {
 	.scroll-content {
-        background-color: map-get($colors, light);
-    }
-
-    ion-card-header {
+	    background-color: map-get($colors, light) !important;
+	}
+	ion-card-header {
         font-weight: bold;
     }
 }

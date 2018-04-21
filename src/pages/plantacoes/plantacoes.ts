@@ -19,8 +19,10 @@ import { PlantacoesFormPage } from '../plantacoes-form/plantacoes-form';
 })
 export class PlantacoesPage {
 
-	private plants: any
+	private plants: any = []
 	private local: any
+
+	shownGroup = null;
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
@@ -108,5 +110,20 @@ export class PlantacoesPage {
 				console.log(err);
 				this.functions.showAlert('Erro! Por favor tente novamente.');
 			});
+	}
+
+	toggleGroup(group) {
+	    if (this.isGroupShown(group)) {
+	        this.shownGroup = null;
+	    } else {
+	        this.shownGroup = group;
+	    }
+	}
+	isGroupShown(group) {
+	    return this.shownGroup === group;
+	}
+
+	checkPermission(permission){
+		return this.functions.checkPermission('plantacoes', permission)
 	}
 }
