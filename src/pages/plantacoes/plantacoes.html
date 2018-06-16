@@ -52,7 +52,7 @@
 			        <div class="accordion" [ngClass]="{show: isGroupShown(i)}">
 			        	<ion-list>
 			        		<ion-item *ngFor="let type of plant.types">
-			        			<ion-toggle [checked]="plant.status" (ionChange)="changeStatus($event,plant.id)"></ion-toggle>
+			        			<ion-toggle [checked]="type.status == '1'" (ionChange)="changeStatus($event, plant.id, type.id)"></ion-toggle>
 			        			<ion-label>{{ type.name }}</ion-label>
 			        		</ion-item>
 			        	</ion-list>

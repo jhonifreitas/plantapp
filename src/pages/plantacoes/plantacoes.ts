@@ -93,15 +93,22 @@ export class PlantacoesPage {
 			}).catch(() => {});
 	}
 
-	changeStatus(event, id) {
+	changeStatus(event, plant_id, type_id) {
 		this.functions.loading('Aguarde...');
 		let status = 0;
-		let ligado = "desligado";
 		if (event.value) {
 			status = 1;
-			ligado = "ligado";
 		}
-		this.service.call_api('changeStatusPlantation', { id: id, status: status })
+
+		let dados:any = new Object()
+
+		dados = {
+			plant_id: plant_id, 
+			type_id: type_id, 
+			status: status
+		}
+
+		this.service.call_api('changeStatusPlantation', dados)
 			.subscribe(data => {
 				console.log(data)
 				this.functions.load.dismiss();

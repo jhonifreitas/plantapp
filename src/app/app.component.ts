@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { StorageProvider } from '../providers/storage/storage';
 
@@ -33,7 +34,8 @@ export class MyApp {
 				public statusBar: StatusBar, 
 				public splashScreen: SplashScreen,
 				private events: Events,
-				private storage: StorageProvider) {
+				private storage: StorageProvider,
+				private screenOrientation: ScreenOrientation) {
 		this.initializeApp();
 
 		if (this.storage.getUser()) {
@@ -50,6 +52,10 @@ export class MyApp {
 			// Here you can do any higher level native things you might need.
 			this.statusBar.styleDefault();
 			this.splashScreen.hide();
+
+			if(this.platform.is('cordova')){
+                this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+            }
 		});
 	}
 
