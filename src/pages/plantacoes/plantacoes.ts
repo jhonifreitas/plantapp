@@ -110,7 +110,10 @@ export class PlantacoesPage {
 
 		this.service.call_api('changeStatusPlantation', dados)
 			.subscribe(data => {
-				console.log(data)
+				let result = data.json();
+				if (!result.status) {
+					this.functions.showAlert(result.data);
+				}
 				this.functions.load.dismiss();
 			}, err => {
 				this.functions.load.dismiss();
