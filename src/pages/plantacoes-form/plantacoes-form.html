@@ -32,7 +32,7 @@
 	      	<ion-item>
 	          	<ion-label floating>Micro-controlador *</ion-label>
 	          	<ion-select formControlName="micro_id">
-			      	<ion-option value="{{ micro.id }}" *ngFor="let micro of micros">{{ micro.local_ip }}</ion-option>
+			      	<ion-option value="{{ micro.id }}" *ngFor="let micro of micros">{{ micro.local_ip }}:{{ micro.port }}</ion-option>
 			    </ion-select>
 	      	</ion-item>
 	      	<ion-item>
