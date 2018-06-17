@@ -30,6 +30,12 @@
 			    </ion-select>
 	      	</ion-item>
 	      	<ion-item>
+	          	<ion-label floating>Micro-controlador *</ion-label>
+	          	<ion-select formControlName="micro_id">
+			      	<ion-option value="{{ micro.id }}" *ngFor="let micro of micros">{{ micro.local_ip }}</ion-option>
+			    </ion-select>
+	      	</ion-item>
+	      	<ion-item>
 			  	<ion-label>Agendar</ion-label>
 			  	<ion-toggle formControlName="repeat"></ion-toggle>
 			</ion-item>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+import { StorageProvider } from '../../providers/storage/storage';
 import { FunctionsDefaultProvider } from '../../providers/functions-default/functions-default';
 import { ServiceProvider } from '../../providers/service/service';
 
@@ -20,6 +21,7 @@ export class PlantacoesFormPage {
 
 	private formPlantacao: FormGroup
 	private tipos: any
+	private micros: any
 	private local: any
 	private id: number
 	private active: boolean
@@ -27,12 +29,14 @@ export class PlantacoesFormPage {
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
 				private formBuilder: FormBuilder,
+				private storage: StorageProvider,
 				private functions: FunctionsDefaultProvider,
 				private service: ServiceProvider) {
 		this.functions.loading('Aguarde...')
 
 		this.formPlantacao = this.formBuilder.group({
 			type_id: [[], Validators.required],
+			micro_id: [[], Validators.required],
 			name: ['', Validators.required],
 			repeat: [false, Validators.required],
 			hour_begin: [{value:'', disabled: true}, Validators.required],
@@ -52,7 +56,16 @@ export class PlantacoesFormPage {
 		this.service.call_api_get('getTipos')
 			.subscribe(data => {
 				this.tipos = data.json().data;
-				this.functions.load.dismiss();
+				
+				this.service.call_api('getMicrocontrollers', {client_id: this.storage.getUser().client_id})
+				.subscribe(data => {
+					this.micros = data.json().data;
+					this.functions.load.dismiss();
+				}, err => {
+					this.functions.load.dismiss();
+					console.log(err);
+				});
+
 			}, err => {
 				this.functions.load.dismiss();
 				console.log(err);
@@ -71,6 +84,7 @@ export class PlantacoesFormPage {
 			types.forEach(type => {
 				typesId.push(type.id)
 			})
+			this.formPlantacao.get('micro_id').setValue(plant.micro_id)
 			this.formPlantacao.get('type_id').setValue(typesId)
 			this.formPlantacao.get('name').setValue(plant.name)
 			this.formPlantacao.get('hour_begin').setValue(plant.hour_begin)
