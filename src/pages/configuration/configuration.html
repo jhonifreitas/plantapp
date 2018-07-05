@@ -1,0 +1,30 @@
+<!--
+  Generated template for the ConfigurationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  	<ion-navbar color="secondary">
+  		<button ion-button menuToggle icon-only>
+	      	<ion-icon name='menu'></ion-icon>
+	    </button>
+    	<ion-title>Configurações</ion-title>
+  	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<form [formGroup]="formConfiguration" (ngSubmit)="save()">
+		<ion-list>
+	      	<ion-item>
+	          	<ion-label floating>Host Api Local *</ion-label>
+	          	<ion-input type="text" formControlName="host_api_local" ></ion-input>
+	      	</ion-item>
+	        <!-- <p>OBS: http://192.168.10.12/Particular/plant-api/</p> -->
+	    </ion-list>
+	    <button ion-button full color="secondary" [disabled]="formConfiguration.invalid">Salvar</button>
+	</form>
+</ion-content>

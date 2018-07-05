@@ -16,6 +16,7 @@ import { PlantacoesPage } from '../pages/plantacoes/plantacoes';
 import { PlantacoesFormPage } from '../pages/plantacoes-form/plantacoes-form';
 import { UsuariosPage } from '../pages/usuarios/usuarios';
 import { UsuariosFormPage } from '../pages/usuarios-form/usuarios-form';
+import { ConfigurationPage } from '../pages/configuration/configuration';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -50,6 +51,7 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
     PlantacoesFormPage,
     UsuariosPage,
     UsuariosFormPage,
+    ConfigurationPage,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
     PlantacoesFormPage,
     UsuariosPage,
     UsuariosFormPage,
+    ConfigurationPage,
   ],
   providers: [
     StatusBar,

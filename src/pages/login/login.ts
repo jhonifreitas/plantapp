@@ -6,6 +6,7 @@ import { FunctionsDefaultProvider } from '../../providers/functions-default/func
 import { StorageProvider } from '../../providers/storage/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { DashboardPage } from '../dashboard/dashboard';
+import { ConfigurationPage } from '../configuration/configuration';
 
 /**
  * Generated class for the LoginPage page.
@@ -62,6 +63,11 @@ export class LoginPage {
 			},err => {
 				console.log(err)
 				this.functions.load.dismiss()
+				this.functions.showAlert("Erro! Por favor verifique as configurações e tente novamente.");
 			})
+  	}
+
+  	pageConfig(){
+  		this.navCtrl.push(ConfigurationPage)
   	}
 }

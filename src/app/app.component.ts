@@ -13,6 +13,7 @@ import { CamerasPage } from '../pages/cameras/cameras';
 import { GruposPage } from '../pages/grupos/grupos';
 import { UsuariosPage } from '../pages/usuarios/usuarios';
 import { UsuariosFormPage } from '../pages/usuarios-form/usuarios-form';
+import { ConfigurationPage } from '../pages/configuration/configuration';
 
 @Component({
 	templateUrl: 'app.html'
@@ -67,6 +68,7 @@ export class MyApp {
 
 	logout(){
 		localStorage.removeItem('user')
+		localStorage.removeItem('permissions')
 		this.nav.setRoot(LoginPage)
 	}
 
@@ -77,22 +79,27 @@ export class MyApp {
 
 		// used for an example of ngFor and navigation
 		this.pages = [
-			{ title: 'Painel de Controle', component: DashboardPage, icon: 'md-pie', permission: 'dashboard' },
+			{ title: 'Dashboard', component: DashboardPage, icon: 'md-pie', permission: 'dashboard' },
 			{ title: 'Locais', component: LocalPage, icon: 'md-map', permission: 'locais' },
 			{ title: 'Câmeras', component: CamerasPage, icon: 'md-camera', permission: 'cameras' },
 			{ title: 'Grupos', component: GruposPage, icon: 'md-people', permission: 'grupos' },
 			{ title: 'Usuários', component: UsuariosPage, icon: 'md-person-add', permission: 'usuarios' },
+			{ title: 'Configurações', component: ConfigurationPage, icon: 'md-construct', permission: 'config' },
 		];
 	}
 
 	checkPermission(permission){
 		let result = false
-		if(this.storage.getPermissions()[permission]){
-			this.storage.getPermissions()[permission].forEach(val=>{
-				if (val == 'view') {
-					result = true
-				}
-			})
+		if (permission == 'config') {
+			result = true
+		}else{
+			if(this.storage.getPermissions() && this.storage.getPermissions()[permission]){
+				this.storage.getPermissions()[permission].forEach(val=>{
+					if (val == 'view') {
+						result = true
+					}
+				})
+			}
 		}
 		return result
 	}
